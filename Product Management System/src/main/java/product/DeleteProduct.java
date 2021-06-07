@@ -35,8 +35,8 @@ public class DeleteProduct extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("DeleteProducts.jsp");
 			rd.include(request, response);
-			pw.print("<br>");
-			pw.println("<b>Product Deleted Successfully</b>");
+			//pw.print("<br>");
+			pw.println("<h2><center>Product Deleted Successfully</center></h2>");
 			}catch(Exception e) {
 					System.out.println(e);
 					
