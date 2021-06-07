@@ -17,35 +17,36 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		PrintWriter pw = response.getWriter();
-		
+
 		int product_ID = Integer.parseInt(request.getParameter("Pid"));
-		//String productName = request.getParameter("Pname");
+		String product_Name = request.getParameter("Pname");
 		int quantity = Integer.parseInt(request.getParameter("quant"));
 		int price = Integer.parseInt(request.getParameter("price"));
-		
+
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pms", "root", "root");
-			PreparedStatement stmt=con.prepareStatement("update products_info set Quantity=?, Price=? where productID=?"); 
-			stmt.setInt(1,product_ID);
-			//stmt.setString(2,productName); 
-			stmt.setInt(2,quantity); 
-			stmt.setInt(3,price);
-			 
-			int i=stmt.executeUpdate();  
+			PreparedStatement stmt = con.prepareStatement("update products_info set ProductName=?,Quantity=?,Price=? where productID=?");
 			
+			stmt.setString(1, product_Name);
+			stmt.setInt(2, quantity);
+			stmt.setInt(3, price);
+			stmt.setInt(4, product_ID);
+			
+			stmt.executeUpdate();
+
 			RequestDispatcher rd = request.getRequestDispatcher("UpdateProducts.jsp");
 			rd.include(request, response);
-			pw.print("<br>");
-			pw.println("<b>Product Updated Successfully</b>");
-			}catch(Exception e) {
-					System.out.println(e);
-					
-			} 
+			pw.println("<h2><center>Product Updated Successfully</center></h2>");
+		} catch (Exception e) {
+			System.out.println(e);
+
+		}
 	}
 
 }
