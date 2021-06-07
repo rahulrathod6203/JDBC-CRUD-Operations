@@ -41,8 +41,8 @@ public class AddProduct extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("AddProducts.jsp");
 			rd.include(request, response);
-			pw.print("<br>");
-			pw.println("<b>Product added Successfully</b>");
+			//pw.print("<br>");
+			pw.println("<h2><center>Product added Successfully</center></h2>");
 			}catch(Exception e) {
 					System.out.println(e);
 					
